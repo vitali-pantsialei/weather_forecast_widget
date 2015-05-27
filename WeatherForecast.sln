@@ -3,8 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4D9D7B84-E876-4AB5-8A7E-BED2231123D9}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\require.js = scripts\require.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1DA9A145-9BD7-4889-AA41-9F0D840097C8}"
+	ProjectSection(SolutionItems) = preProject
+		content\style.css = content\style.css
+		content\weathericon.jpg = content\weathericon.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D9D7B84-E876-4AB5-8A7E-BED2231123D9} = {3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}
+		{1DA9A145-9BD7-4889-AA41-9F0D840097C8} = {3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}
 	EndGlobalSection
 EndGlobal
