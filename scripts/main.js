@@ -1,4 +1,5 @@
+var weather;
 require(['weather_widget/weather'], function (weatherModule) {
-    var weather = new weatherModule();
+    weather = new weatherModule(3);
     weather.set('result');
 })

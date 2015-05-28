@@ -1,12 +1,15 @@
 define(["./data"], function (getData) {
-    var retModule = function () {
+    var retModule = function (perPage) {
+        var page = 1;
+        var inputData = new getData();
+        var currId;
         this.set = function (id) {
+            currId = id;
             var field = document.getElementById(id);
-            var inputData = new getData();
             var index;
             var resultHTML = "";
             
-            for (index = 0; index != inputData.length; ++index) {
+            for (index = (page - 1) * perPage; index != (inputData.length > page * perPage ? page * perPage : inputData.length); ++index) {
                 //Night night night
                 resultHTML += ('<fieldset><legend><h2>' + inputData[index].town + " " + inputData[index].date + '</h2></legend>');
                 resultHTML += ('<table><tr><td id="day_night_style"><h1>Night</h1>');
@@ -22,7 +25,23 @@ define(["./data"], function (getData) {
 
                 resultHTML += ('</fieldset>')
             }
+            resultHTML += ('<br/>')
+            if (page != 1)
+                resultHTML += ('<input type="submit" onclick="weather.back()" value="Back">');
+            if (inputData.length > page * perPage)
+                resultHTML += ('<input type="submit" onclick="weather.next()" value="Next">');
             field.innerHTML = resultHTML;
+        }
+        this.refreshData = function () {
+            inputData = new getData();
+        }
+        this.back = function () {
+            --page;
+            this.set(currId);
+        }
+        this.next = function () {
+            ++page;
+            this.set(currId);
         }
     };
     return retModule;

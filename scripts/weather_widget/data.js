@@ -36,6 +36,18 @@ define([], function () {
             "pressureDay": "743...745",
             "wetNight": "68...73",
             "wetDay": "38...43"
+        },
+        {
+            "town": "Soligorsk",
+            "date": "2015-05-30",
+            "temperatureNight": "+8 +19",
+            "temperatureDay": "+21 +22",
+            "imageNight": "moon",
+            "imageDay": "sunny",
+            "pressureNight": "746...748",
+            "pressureDay": "745...747",
+            "wetNight": "87...92",
+            "wetDay": "40...45"
         }
         ]
     }

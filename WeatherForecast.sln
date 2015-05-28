@@ -3,20 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}"
-	ProjectSection(SolutionItems) = preProject
-		index.html = index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4D9D7B84-E876-4AB5-8A7E-BED2231123D9}"
-	ProjectSection(SolutionItems) = preProject
-		scripts\require.js = scripts\require.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1DA9A145-9BD7-4889-AA41-9F0D840097C8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{AD022260-9193-4D98-A947-664C442E67C2}"
 	ProjectSection(SolutionItems) = preProject
 		content\style.css = content\style.css
 		content\weathericon.jpg = content\weathericon.jpg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4DF29FB5-B73B-4DCE-9DF7-CDA47BCC4887}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\main.js = scripts\main.js
+		scripts\require.js = scripts\require.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "weather_widget", "weather_widget", "{7E891C26-94D4-4BB8-AF18-B75D2B8EA0AF}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\weather_widget\data.js = scripts\weather_widget\data.js
+		scripts\weather_widget\weather.js = scripts\weather_widget\weather.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{42858265-DD1D-49C3-AADC-EE08C5FF70D9}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\weather_widget\content\style.css = scripts\weather_widget\content\style.css
+		scripts\weather_widget\content\weathericon.jpg = scripts\weather_widget\content\weathericon.jpg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86218751-83F2-40D2-8B17-F39381AD80B7}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
 	EndProjectSection
 EndProject
 Global
@@ -24,7 +37,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4D9D7B84-E876-4AB5-8A7E-BED2231123D9} = {3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}
-		{1DA9A145-9BD7-4889-AA41-9F0D840097C8} = {3C40FEC5-2B4B-4349-B43B-31714D1B3B1A}
+		{AD022260-9193-4D98-A947-664C442E67C2} = {86218751-83F2-40D2-8B17-F39381AD80B7}
+		{4DF29FB5-B73B-4DCE-9DF7-CDA47BCC4887} = {86218751-83F2-40D2-8B17-F39381AD80B7}
+		{7E891C26-94D4-4BB8-AF18-B75D2B8EA0AF} = {4DF29FB5-B73B-4DCE-9DF7-CDA47BCC4887}
+		{42858265-DD1D-49C3-AADC-EE08C5FF70D9} = {7E891C26-94D4-4BB8-AF18-B75D2B8EA0AF}
 	EndGlobalSection
 EndGlobal
