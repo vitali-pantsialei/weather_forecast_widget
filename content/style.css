@@ -1,54 +1,40 @@
-﻿body
-{
+﻿body {
 }
 
-#sunny
-{
-    height:85px;
-    width:85px;
-    background:url('weathericon.jpg') 0 0;
+.image-size {
+    height: 85px;
+    width: 85px;
 }
 
-#moon
-{
-    height:85px;
-    width:85px;
-    background:url('weathericon.jpg') -90px 0;
+.sunny {
+    background: url('weathericon.jpg') 0 0;
 }
 
-#cloud
-{
-    height:85px;
-    width:85px;
-    background:url('weathericon.jpg') 0 -90px;
+.moon {
+    background: url('weathericon.jpg') -90px 0;
 }
 
-#rain
-{
-    height:85px;
-    width:85px;
-    background:url('weathericon.jpg') -270px -180px;
+.cloud {
+    background: url('weathericon.jpg') 0 -90px;
 }
 
-#thunder
-{
-    height:85px;
-    width:85px;
-    background:url('weathericon.jpg') -270px -270px;
+.rain {
+    background: url('weathericon.jpg') -270px -180px;
 }
 
-#day_night_style
-{
-    width:400px;
+.thunder {
+    background: url('weathericon.jpg') -270px -270px;
 }
 
-#info_style
-{
-    width:70px;
-    text-align:center;
+.day_night_style {
+    width: 400px;
 }
 
-h2
-{
+.info_style {
+    width: 70px;
+    text-align: center;
+}
+
+h2 {
     color: blue;
 }
