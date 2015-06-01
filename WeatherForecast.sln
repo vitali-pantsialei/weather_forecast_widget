@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "weather_widget", "weather_w
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{42858265-DD1D-49C3-AADC-EE08C5FF70D9}"
 	ProjectSection(SolutionItems) = preProject
+		scripts\weather_widget\content\buttonstemplate.html = scripts\weather_widget\content\buttonstemplate.html
+		scripts\weather_widget\content\fieldtemplate.html = scripts\weather_widget\content\fieldtemplate.html
 		scripts\weather_widget\content\style.css = scripts\weather_widget\content\style.css
 		scripts\weather_widget\content\weathericon.jpg = scripts\weather_widget\content\weathericon.jpg
 	EndProjectSection
