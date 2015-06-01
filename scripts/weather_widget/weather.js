@@ -5,33 +5,37 @@ define([], function () {
         var currId;
         var fieldTemplate;
         var buttonsTemplate;
+        var today = new Date();
         var set = function (id) {
             currId = id;
             var field = document.getElementById(id);
             field.innerHTML = "";
             var index;
             var resultHTML = "";
+            var currDate = new Date(today);
 
-            for (index = (page - 1) * perPage; index != (inputData.length > page * perPage ? page * perPage : inputData.length) ; ++index) {
+            for (index = (page - 1) * perPage; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index) {
                 var cpTemp = fieldTemplate;
                 var legend = cpTemp.getElementsByTagName('h2');
-                legend[0].innerHTML = inputData[index].town + " " + inputData[index].date;
 
-                var p1 = cpTemp.getElementsByTagName('p');
-                var img = cpTemp.createElement('p');
-                img.setAttribute('class', 'image-size ' + inputData[index].imageNight);
-                p1[0].innerHTML = img.outerHTML;
-                img = cpTemp.createElement('p');
-                img.setAttribute('class', 'image-size ' + inputData[index].imageDay);
-                p1[2].innerHTML = img.outerHTML;
+                currDate.setDate(today.getDate() + index);
+                legend[0].innerHTML = inputData.city.name + " " + currDate.toLocaleString();
+
+                //var p1 = cpTemp.getElementsByTagName('p');
+                //var img = cpTemp.createElement('p');
+                //img.setAttribute('class', 'image-size ' + inputData[index].imageNight);
+                //p1[0].innerHTML = img.outerHTML;
+                //img = cpTemp.createElement('p');
+                //img.setAttribute('class', 'image-size ' + inputData[index].imageDay);
+                //p1[2].innerHTML = img.outerHTML;
 
                 var centers = cpTemp.getElementsByTagName('center');
-                centers[0].innerHTML = inputData[index].temperatureNight;
-                centers[1].innerHTML = inputData[index].pressureNight;
-                centers[2].innerHTML = inputData[index].wetNight;
-                centers[3].innerHTML = inputData[index].temperatureDay;
-                centers[4].innerHTML = inputData[index].pressureDay;
-                centers[5].innerHTML = inputData[index].wetDay;
+                centers[0].innerHTML = inputData.list[index].temp.night;
+                centers[1].innerHTML = inputData.list[index].pressure;
+                centers[2].innerHTML = inputData.list[index].humidity;
+                centers[3].innerHTML = inputData.list[index].temp.day;
+                centers[4].innerHTML = inputData.list[index].pressure;
+                centers[5].innerHTML = inputData.list[index].humidity;
 
                 field.innerHTML += cpTemp.documentElement.innerHTML;
             }
@@ -44,7 +48,7 @@ define([], function () {
             else {
                 buttons[0].setAttribute('style', 'display:none');
             }
-            if (inputData.length > page * perPage) {
+            if (inputData.list.length > page * perPage) {
                 buttons[1].setAttribute('style', 'display:block');
                 buttons[1].setAttribute('onclick', 'weather.next()');
             }

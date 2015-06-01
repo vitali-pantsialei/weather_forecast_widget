@@ -1,0 +1,25 @@
+{
+    "cod": "200",
+    "message": 0.0281,
+    "city": {
+        "id": 625144,
+        "name": "Minsk",
+        "coord": { "lon": 27.566668, "lat": 53.900002 },
+        "country": "BY",
+        "population": 0,
+        "sys": { "population": 0 }
+    },
+    "cnt": 10,
+    "list": [
+        { "dt": 1433152800, "temp": { "day": 22.04, "min": 15.02, "max": 23.6, "night": 15.02, "eve": 23.6, "morn": 20.03 }, "pressure": 1012.35, "humidity": 52, "weather": [ { "id": 800, "main": "Clear", "description": "sky is clear", "icon": "01d" } ], "speed": 3.75, "deg": 198, "clouds": 0 },
+        { "dt": 1433239200, "temp": { "day": 25.04, "min": 15.28, "max": 25.04, "night": 19.1, "eve": 23.82, "morn": 15.28 }, "pressure": 1008.36, "humidity": 51, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10d" } ], "speed": 4.96, "deg": 212, "clouds": 32, "rain": 0.32 },
+        { "dt": 1433325600, "temp": { "day": 24.51, "min": 18.34, "max": 25.17, "night": 20.21, "eve": 24.75, "morn": 18.34 }, "pressure": 1007.05, "humidity": 52, "weather": [ { "id": 800, "main": "Clear", "description": "sky is clear", "icon": "01d" } ], "speed": 8.06, "deg": 254, "clouds": 0 },
+        { "dt": 1433412000, "temp": { "day": 22.27, "min": 12.83, "max": 22.27, "night": 12.83, "eve": 18.74, "morn": 19.42 }, "pressure": 1011.66, "humidity": 0, "weather": [ { "id": 800, "main": "Clear", "description": "sky is clear", "icon": "01d" } ], "speed": 5.56, "deg": 331, "clouds": 0 },
+        { "dt": 1433498400, "temp": { "day": 19.36, "min": 10.9, "max": 19.36, "night": 10.9, "eve": 17.47, "morn": 15.91 }, "pressure": 1016.53, "humidity": 0, "weather": [ { "id": 800, "main": "Clear", "description": "sky is clear", "icon": "01d" } ], "speed": 5.54, "deg": 1, "clouds": 0 },
+        { "dt": 1433584800, "temp": { "day": 18.3, "min": 11.24, "max": 18.3, "night": 11.24, "eve": 15.49, "morn": 16.04 }, "pressure": 1012.91, "humidity": 0, "weather": [ { "id": 800, "main": "Clear", "description": "sky is clear", "icon": "01d" } ], "speed": 7.59, "deg": 343, "clouds": 0 },
+        { "dt": 1433671200, "temp": { "day": 15.53, "min": 9.7, "max": 15.53, "night": 9.7, "eve": 13.74, "morn": 14.83 }, "pressure": 1013.96, "humidity": 0, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10d" } ], "speed": 7.16, "deg": 347, "clouds": 46, "rain": 2.21 },
+        { "dt": 1433757600, "temp": { "day": 15.43, "min": 10.02, "max": 15.43, "night": 10.02, "eve": 14.11, "morn": 13.27 }, "pressure": 1011, "humidity": 0, "weather": [ { "id": 501, "main": "Rain", "description": "moderate rain", "icon": "10d" } ], "speed": 7.78, "deg": 0, "clouds": 41, "rain": 3.22 },
+        { "dt": 1433844000, "temp": { "day": 16.57, "min": 7.83, "max": 16.57, "night": 7.83, "eve": 13.63, "morn": 13.65 }, "pressure": 1014.36, "humidity": 0, "weather": [ { "id": 500, "main": "Rain", "description": "light rain", "icon": "10d" } ], "speed": 6.48, "deg": 354, "clouds": 52, "rain": 1.84 },
+        { "dt": 1433930400, "temp": { "day": 16.64, "min": 6.94, "max": 16.64, "night": 6.94, "eve": 14.37, "morn": 14.48 }, "pressure": 1014.28, "humidity": 0, "weather": [ { "id": 501, "main": "Rain", "description": "moderate rain", "icon": "10d" } ], "speed": 3.34, "deg": 80, "clouds": 49, "rain": 3.31 }
+    ] 
+}
