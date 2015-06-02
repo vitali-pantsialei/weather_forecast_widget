@@ -10,11 +10,11 @@ define([], function () {
             daysDisplay = newDays;
         }
         this.getJson = function () {
-            httpAddress += city + '&cnt=' + days + '&units=metric&mode=json';
+            var address = httpAddress + city + '&cnt=' + days + '&units=metric&mode=json';
 
             var xhr = new XMLHttpRequest();
             var answer;
-            xhr.open('GET', httpAddress, false);
+            xhr.open('GET', address, false);
             xhr.onreadystatechange = function () {
                 if (this.readyState !== 4) return;
                 answer = this.responseText;
