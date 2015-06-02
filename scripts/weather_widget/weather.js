@@ -6,6 +6,10 @@ define([], function () {
         var fieldTemplate;
         var buttonsTemplate;
         var today = new Date();
+        var options = {
+            weekday: "long", year: "numeric", month: "long",
+            day: "numeric"
+        };
         var set = function (id) {
             currId = id;
             var field = document.getElementById(id);
@@ -17,9 +21,13 @@ define([], function () {
             for (index = (page - 1) * perPage; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index) {
                 var cpTemp = fieldTemplate;
                 var legend = cpTemp.getElementsByTagName('h2');
+                var descr = cpTemp.getElementsByTagName('h4');
 
                 currDate.setDate(today.getDate() + index);
-                legend[0].innerHTML = inputData.city.name + " " + currDate.toLocaleString();
+                legend[0].innerHTML = inputData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
+
+                descr[0].innerHTML = inputData.list[index].weather[0].description;
+                descr[1].innerHTML = inputData.list[index].weather[0].description;
 
                 var p1 = cpTemp.getElementsByTagName('p');
                 var img = cpTemp.createElement('p');
@@ -55,6 +63,7 @@ define([], function () {
             else {
                 buttons[1].setAttribute('style', 'display:none');
             }
+            buttons[2].setAttribute('onclick', 'weather.refreshData()');
             field.innerHTML += buttonsTemplate.documentElement.innerHTML;
         }
 
