@@ -21,13 +21,13 @@ define([], function () {
                 currDate.setDate(today.getDate() + index);
                 legend[0].innerHTML = inputData.city.name + " " + currDate.toLocaleString();
 
-                //var p1 = cpTemp.getElementsByTagName('p');
-                //var img = cpTemp.createElement('p');
-                //img.setAttribute('class', 'image-size ' + inputData[index].imageNight);
-                //p1[0].innerHTML = img.outerHTML;
-                //img = cpTemp.createElement('p');
-                //img.setAttribute('class', 'image-size ' + inputData[index].imageDay);
-                //p1[2].innerHTML = img.outerHTML;
+                var p1 = cpTemp.getElementsByTagName('p');
+                var img = cpTemp.createElement('p');
+                img.setAttribute('class', 'image-size ' + inputData.list[index].weather[0].main + 'Night');
+                p1[0].innerHTML = img.outerHTML;
+                img = cpTemp.createElement('p');
+                img.setAttribute('class', 'image-size ' + inputData.list[index].weather[0].main + 'Day');
+                p1[2].innerHTML = img.outerHTML;
 
                 var centers = cpTemp.getElementsByTagName('center');
                 centers[0].innerHTML = inputData.list[index].temp.night;

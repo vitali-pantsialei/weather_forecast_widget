@@ -6,20 +6,28 @@
     width: 85px;
 }
 
-.sunny {
+.ClearDay {
     background: url('weathericon.jpg') 0 0;
 }
 
-.moon {
+.ClearNight {
     background: url('weathericon.jpg') -90px 0;
 }
 
-.cloud {
+.CloudsDay {
     background: url('weathericon.jpg') 0 -90px;
 }
 
-.rain {
+.CloudsNight {
+    background: url('weathericon.jpg') -180px -90px;
+}
+
+.RainDay {
     background: url('weathericon.jpg') -270px -180px;
+}
+
+.RainNight {
+    background: url('weathericon.jpg') -360px -180px;
 }
 
 .thunder {

@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "weather_widget", "weather_widget", "{7E891C26-94D4-4BB8-AF18-B75D2B8EA0AF}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\weather_widget\data.js = scripts\weather_widget\data.js
+		scripts\weather_widget\openWeatherProvider.js = scripts\weather_widget\openWeatherProvider.js
 		scripts\weather_widget\weather.js = scripts\weather_widget\weather.js
 	EndProjectSection
 EndProject
@@ -25,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{4285
 	ProjectSection(SolutionItems) = preProject
 		scripts\weather_widget\content\buttonstemplate.html = scripts\weather_widget\content\buttonstemplate.html
 		scripts\weather_widget\content\fieldtemplate.html = scripts\weather_widget\content\fieldtemplate.html
+		scripts\weather_widget\content\mockData.json = scripts\weather_widget\content\mockData.json
 		scripts\weather_widget\content\style.css = scripts\weather_widget\content\style.css
 		scripts\weather_widget\content\weathericon.jpg = scripts\weather_widget\content\weathericon.jpg
 	EndProjectSection
