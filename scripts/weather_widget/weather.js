@@ -1,7 +1,7 @@
 define([], function () {
     var retModule = function (perPage, dataProvider) {
         var page = 1;
-        var inputData = new dataProvider.getJson();
+        var inputData = dataProvider.getDailyJson();
         var currId;
         var fieldTemplate;
         var buttonsTemplate;
@@ -15,40 +15,45 @@ define([], function () {
             var field = document.getElementById(id);
             field.innerHTML = "";
             var index;
-            var resultHTML = "";
+            for (index = 0; index != perPage; index++)
+                field.innerHTML += fieldTemplate.documentElement.innerHTML;
+            field.innerHTML += buttonsTemplate.documentElement.innerHTML;
+            refresh();
+        }
+
+        var refresh = function () {
+            var field = document.getElementById(currId);
+            var index, secIndex;
+            var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);
+            var img = field.getElementsByTagName('img');
+            var centers = field.getElementsByTagName('center');
+            var legend = field.getElementsByTagName('h2');
+            var descr = field.getElementsByTagName('h4');
 
-            for (index = (page - 1) * perPage; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index) {
-                var cpTemp = fieldTemplate;
-                var legend = cpTemp.getElementsByTagName('h2');
-                var descr = cpTemp.getElementsByTagName('h4');
+            for (index = 0; index != perPage; index++)
+                fieldsets[index].setAttribute('style', 'display:block');
 
+            for (index = (page - 1) * perPage, secIndex = 0; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index, ++secIndex) {
+                
                 currDate.setDate(today.getDate() + index);
-                legend[0].innerHTML = inputData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
+                legend[secIndex].innerHTML = inputData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
 
-                descr[0].innerHTML = inputData.list[index].weather[0].description;
-                descr[1].innerHTML = inputData.list[index].weather[0].description;
+                descr[secIndex * 2].innerHTML = inputData.list[index].weather[0].description;
+                descr[secIndex * 2 + 1].innerHTML = inputData.list[index].weather[0].description;
 
-                var p1 = cpTemp.getElementsByTagName('p');
-                var img = cpTemp.createElement('p');
-                img.setAttribute('class', 'image-size ' + inputData.list[index].weather[0].main + 'Night');
-                p1[0].innerHTML = img.outerHTML;
-                img = cpTemp.createElement('p');
-                img.setAttribute('class', 'image-size ' + inputData.list[index].weather[0].main + 'Day');
-                p1[2].innerHTML = img.outerHTML;
+                img[secIndex * 2].setAttribute('src', 'http://openweathermap.org/img/w/' + inputData.list[index].weather[0].icon + '.png');
+                img[secIndex * 2 + 1].setAttribute('src', 'http://openweathermap.org/img/w/' + inputData.list[index].weather[0].icon + '.png');
 
-                var centers = cpTemp.getElementsByTagName('center');
-                centers[0].innerHTML = inputData.list[index].temp.night;
-                centers[1].innerHTML = inputData.list[index].pressure;
-                centers[2].innerHTML = inputData.list[index].humidity;
-                centers[3].innerHTML = inputData.list[index].temp.day;
-                centers[4].innerHTML = inputData.list[index].pressure;
-                centers[5].innerHTML = inputData.list[index].humidity;
-
-                field.innerHTML += cpTemp.documentElement.innerHTML;
+                centers[secIndex * 6].innerHTML = inputData.list[index].temp.night;
+                centers[secIndex * 6 + 1].innerHTML = inputData.list[index].pressure;
+                centers[secIndex * 6 + 2].innerHTML = inputData.list[index].humidity;
+                centers[secIndex * 6 + 3].innerHTML = inputData.list[index].temp.day;
+                centers[secIndex * 6 + 4].innerHTML = inputData.list[index].pressure;
+                centers[secIndex * 6 + 5].innerHTML = inputData.list[index].humidity;
             }
 
-            var buttons = buttonsTemplate.getElementsByTagName('input');
+            var buttons = field.getElementsByTagName('input');
             if (page != 1) {
                 buttons[0].setAttribute('style', 'display:block');
                 buttons[0].setAttribute('onclick', 'weather.back()');
@@ -61,26 +66,29 @@ define([], function () {
                 buttons[1].setAttribute('onclick', 'weather.next()');
             }
             else {
+                if ((inputData.list.length) % perPage != 0) {
+                    for (index = (inputData.list.length) % perPage; index != perPage; index++)
+                        fieldsets[index].setAttribute('style', 'display:none');
+                }
                 buttons[1].setAttribute('style', 'display:none');
             }
             buttons[2].setAttribute('onclick', 'weather.refreshData()');
-            field.innerHTML += buttonsTemplate.documentElement.innerHTML;
         }
 
         this.set = function (id) {
             set(id);
         }
         this.refreshData = function () {
-            inputData = dataProvider.getJson();
-            set(currId);
+            inputData = dataProvider.getDailyJson();
+            refresh();
         }
         this.back = function () {
             --page;
-            set(currId);
+            refresh();
         }
         this.next = function () {
             ++page;
-            set(currId);
+            refresh();
         }
 
         fieldTemplate = document.implementation.createDocument('', 'html', null);
