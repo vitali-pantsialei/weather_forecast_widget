@@ -10,6 +10,18 @@ define([], function () {
             weekday: "long", year: "numeric", month: "long",
             day: "numeric"
         };
+        var refreshData = function () {
+            inputData = dataProvider.getDailyJson();
+            refresh();
+        }
+        var back = function () {
+            --page;
+            refresh();
+        }
+        var next = function () {
+            ++page;
+            refresh();
+        }
         var set = function (id) {
             currId = id;
             var field = document.getElementById(id);
@@ -18,9 +30,12 @@ define([], function () {
             for (index = 0; index != perPage; index++)
                 field.innerHTML += fieldTemplate.documentElement.innerHTML;
             field.innerHTML += buttonsTemplate.documentElement.innerHTML;
+            var buttons = field.getElementsByTagName('input');
+            buttons[0].onclick = back;
+            buttons[1].onclick = next;
+            buttons[2].onclick = refreshData;
             refresh();
         }
-
         var refresh = function () {
             var field = document.getElementById(currId);
             var index, secIndex;
@@ -56,14 +71,12 @@ define([], function () {
             var buttons = field.getElementsByTagName('input');
             if (page != 1) {
                 buttons[0].setAttribute('style', 'display:block');
-                buttons[0].setAttribute('onclick', 'weather.back()');
             }
             else {
                 buttons[0].setAttribute('style', 'display:none');
             }
             if (inputData.list.length > page * perPage) {
                 buttons[1].setAttribute('style', 'display:block');
-                buttons[1].setAttribute('onclick', 'weather.next()');
             }
             else {
                 if ((inputData.list.length) % perPage != 0) {
@@ -72,23 +85,10 @@ define([], function () {
                 }
                 buttons[1].setAttribute('style', 'display:none');
             }
-            buttons[2].setAttribute('onclick', 'weather.refreshData()');
         }
 
         this.set = function (id) {
             set(id);
-        }
-        this.refreshData = function () {
-            inputData = dataProvider.getDailyJson();
-            refresh();
-        }
-        this.back = function () {
-            --page;
-            refresh();
-        }
-        this.next = function () {
-            ++page;
-            refresh();
         }
 
         fieldTemplate = document.implementation.createDocument('', 'html', null);
