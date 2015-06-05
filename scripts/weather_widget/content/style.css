@@ -6,26 +6,6 @@
     width: 85px;
 }
 
-.sunny {
-    background: url('weathericon.jpg') 0 0;
-}
-
-.moon {
-    background: url('weathericon.jpg') -90px 0;
-}
-
-.cloud {
-    background: url('weathericon.jpg') 0 -90px;
-}
-
-.rain {
-    background: url('weathericon.jpg') -270px -180px;
-}
-
-.thunder {
-    background: url('weathericon.jpg') -270px -270px;
-}
-
 .day_night_style {
     width: 400px;
 }

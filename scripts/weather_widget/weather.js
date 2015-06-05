@@ -2,9 +2,9 @@ define([], function () {
     var retModule = function (perPage, dataProvider) {
         var page = 1;
         var inputData = dataProvider.getDailyJson();
+        var hoursData = dataProvider.getHoursJson();
         var currId;
-        var fieldTemplate;
-        var buttonsTemplate;
+        var fieldTemplate, buttonsTemplate, tabsTemplate, hoursTemplate;
         var today = new Date();
         var options = {
             weekday: "long", year: "numeric", month: "long",
@@ -12,6 +12,7 @@ define([], function () {
         };
         var refreshData = function () {
             inputData = dataProvider.getDailyJson();
+            hoursData = dataProvider.getHoursJson();
             refresh();
         }
         var back = function () {
@@ -22,22 +23,59 @@ define([], function () {
             ++page;
             refresh();
         }
+        var setHours = function () {
+            var field = document.getElementById(currId);
+            var tab = field.getElementsByClassName('tabs');
+            var lis = tab[0].getElementsByTagName('li');
+            var tabInner = field.getElementsByClassName('tabInner');
+            var divs = tabInner[0].getElementsByTagName('div');
+            divs[0].setAttribute('style', 'display:block');
+            divs[1].setAttribute('style', 'display:none');
+            lis[0].setAttribute('class', 'active');
+            lis[1].setAttribute('class', '');
+        }
+        var setDays = function () {
+            var field = document.getElementById(currId);
+            var tab = field.getElementsByClassName('tabs');
+            var lis = tab[0].getElementsByTagName('li');
+            var tabInner = field.getElementsByClassName('tabInner');
+            var divs = tabInner[0].getElementsByTagName('div');
+            divs[0].setAttribute('style', 'display:none');
+            divs[1].setAttribute('style', 'display:block');
+            lis[0].setAttribute('class', '');
+            lis[1].setAttribute('class', 'active');
+        }
+
         var set = function (id) {
-            currId = id;
             var field = document.getElementById(id);
-            field.innerHTML = "";
             var index;
+            currId = id;
+            field.innerHTML = tabsTemplate.documentElement.innerHTML;
+            var tabInner = field.getElementsByClassName('tabInner');
+            var tabDivs = tabInner[0].getElementsByTagName('div');
+            var lis = field.getElementsByTagName('li');
+            setHours();
+
+            tabDivs[0].innerHTML = "";
+            tabDivs[1].innerHTML = "";
+            for (index = 0; index != 5; index++)
+                tabDivs[0].innerHTML += hoursTemplate.documentElement.innerHTML;
             for (index = 0; index != perPage; index++)
-                field.innerHTML += fieldTemplate.documentElement.innerHTML;
+                tabDivs[1].innerHTML += fieldTemplate.documentElement.innerHTML;
             field.innerHTML += buttonsTemplate.documentElement.innerHTML;
+
             var buttons = field.getElementsByTagName('input');
+            lis[0].onclick = setHours;
+            lis[1].onclick = setDays;
             buttons[0].onclick = back;
             buttons[1].onclick = next;
             buttons[2].onclick = refreshData;
             refresh();
         }
         var refresh = function () {
-            var field = document.getElementById(currId);
+            var myfield = document.getElementById(currId);
+            var tabInner = myfield.getElementsByClassName('tabInner');
+            var field = tabInner[0].getElementsByTagName('div')[1];
             var index, secIndex;
             var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);
@@ -68,7 +106,7 @@ define([], function () {
                 centers[secIndex * 6 + 5].innerHTML = inputData.list[index].humidity;
             }
 
-            var buttons = field.getElementsByTagName('input');
+            var buttons = myfield.getElementsByTagName('input');
             if (page != 1) {
                 buttons[0].setAttribute('style', 'display:block');
             }
@@ -105,6 +143,22 @@ define([], function () {
         xhr.onreadystatechange = function () {
             if (this.readyState !== 4) return;
             buttonsTemplate.documentElement.innerHTML = this.responseText;
+        };
+        xhr.send();
+
+        tabsTemplate = document.implementation.createDocument('', 'html', null);
+        xhr.open('GET', 'scripts/weather_widget/content/tabstemplate.html', false);
+        xhr.onreadystatechange = function () {
+            if (this.readyState !== 4) return;
+            tabsTemplate.documentElement.innerHTML = this.responseText;
+        };
+        xhr.send();
+
+        hoursTemplate = document.implementation.createDocument('', 'html', null);
+        xhr.open('GET', 'scripts/weather_widget/content/hourstemplate.html', false);
+        xhr.onreadystatechange = function () {
+            if (this.readyState !== 4) return;
+            hoursTemplate.documentElement.innerHTML = this.responseText;
         };
         xhr.send();
     };

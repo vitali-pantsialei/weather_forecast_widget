@@ -6,34 +6,6 @@
     width: 85px;
 }
 
-.ClearDay {
-    background: url('weathericon.jpg') 0 0;
-}
-
-.ClearNight {
-    background: url('weathericon.jpg') -90px 0;
-}
-
-.CloudsDay {
-    background: url('weathericon.jpg') 0 -90px;
-}
-
-.CloudsNight {
-    background: url('weathericon.jpg') -180px -90px;
-}
-
-.RainDay {
-    background: url('weathericon.jpg') -270px -180px;
-}
-
-.RainNight {
-    background: url('weathericon.jpg') -360px -180px;
-}
-
-.thunder {
-    background: url('weathericon.jpg') -270px -270px;
-}
-
 .day_night_style {
     width: 400px;
 }
@@ -46,3 +18,32 @@
 h2 {
     color: blue;
 }
+
+.tabs ul {
+    list-style: none;
+}
+
+    .tabs ul li {
+        float: left;
+        background: #eee;
+        border: 1px #aaa solid;
+        border-bottom: none;
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+        .tabs ul li.active {
+            margin-bottom: -1px;
+            padding-bottom: 6px;
+        }
+
+.tabInner {
+    clear: both;
+    border: 1px solid #aaa;
+    overflow: hidden;
+    background: #eee;
+}
+
+    .tabInner div {
+        padding: 10px;
+    }
