@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{AD022260-9193-4D98-A947-664C442E67C2}"
 	ProjectSection(SolutionItems) = preProject
 		content\style.css = content\style.css
-		content\weathericon.jpg = content\weathericon.jpg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4DF29FB5-B73B-4DCE-9DF7-CDA47BCC4887}"
@@ -26,9 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{4285
 	ProjectSection(SolutionItems) = preProject
 		scripts\weather_widget\content\buttonstemplate.html = scripts\weather_widget\content\buttonstemplate.html
 		scripts\weather_widget\content\fieldtemplate.html = scripts\weather_widget\content\fieldtemplate.html
+		scripts\weather_widget\content\hourstemplate.html = scripts\weather_widget\content\hourstemplate.html
 		scripts\weather_widget\content\mockData.json = scripts\weather_widget\content\mockData.json
 		scripts\weather_widget\content\style.css = scripts\weather_widget\content\style.css
-		scripts\weather_widget\content\weathericon.jpg = scripts\weather_widget\content\weathericon.jpg
+		scripts\weather_widget\content\tabstemplate.html = scripts\weather_widget\content\tabstemplate.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86218751-83F2-40D2-8B17-F39381AD80B7}"

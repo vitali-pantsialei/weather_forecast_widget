@@ -7,23 +7,29 @@ define([], function () {
         var currState = 'hour';
         var fieldTemplate, buttonsTemplate, tabsTemplate, hoursTemplate;
         var today = new Date();
+
         var options = {
             weekday: "long", year: "numeric", month: "long",
             day: "numeric"
         };
+
         var refreshData = function () {
             inputData = dataProvider.getDailyJson();
             hoursData = dataProvider.getHoursJson();
+            refreshHours();
             refreshDaily();
         }
+
         var back = function () {
             --page;
             refreshDaily();
         }
+
         var next = function () {
             ++page;
             refreshDaily();
         }
+
         var setHours = function () {
             var field = document.getElementById(currId);
             var tab = field.getElementsByClassName('tabs');
@@ -39,6 +45,7 @@ define([], function () {
             buttons[1].setAttribute('style', 'display:none');
             currState = 'hour';
         }
+
         var setDays = function () {
             var field = document.getElementById(currId);
             var tab = field.getElementsByClassName('tabs');
@@ -85,14 +92,14 @@ define([], function () {
             var myfield = document.getElementById(currId);
             var tabInner = myfield.getElementsByClassName('tabInner');
             var field = tabInner[0].getElementsByTagName('div')[0];
-            var index = 0, secIndex = 0;
+            var index = 0, secIndex = 0, legendIndex = 1;
             var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);
             var img = field.getElementsByTagName('img');
             var centers = field.getElementsByTagName('center');
             var legend = field.getElementsByTagName('h2');
             var descr = field.getElementsByTagName('h4');
-            var tds = field.getElementsByTagName('td');
+            var tds = field.getElementsByClassName('hour-forecast');
 
             currDate.setHours(0);
             currDate.setMinutes(0);
@@ -102,9 +109,25 @@ define([], function () {
                 secIndex++;
             while (getFormat1(currDate) != hoursData.list[secIndex].dt_txt) {
                 tds[index++].setAttribute('style', 'display:none');
-                currDate.setHours(currDate.getHours() + 3);
+                currDate.setHours(currDate.getHours() + 3); 
             }
+            //------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            legend[0].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
+            while (secIndex != hoursData.cnt) {
+                descr[index].innerHTML = hoursData.list[secIndex].weather[0].description;
 
+                img[index].setAttribute('src', 'http://openweathermap.org/img/w/' + hoursData.list[secIndex].weather[0].icon + '.png');
+
+                centers[index * 3].innerHTML = hoursData.list[secIndex].main.temp;
+                centers[index * 3 + 1].innerHTML = hoursData.list[secIndex].main.pressure;
+                centers[index * 3 + 2].innerHTML = hoursData.list[secIndex].main.humidity;
+
+                if (currDate.getHours() == 0)
+                    legend[legendIndex++].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
+                currDate.setHours(currDate.getHours() + 3);
+                index++;
+                secIndex++;
+            }
         }
 
         var refreshDaily = function () {
