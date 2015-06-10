@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{4285
 		scripts\weather_widget\content\fieldtemplate.html = scripts\weather_widget\content\fieldtemplate.html
 		scripts\weather_widget\content\hourstemplate.html = scripts\weather_widget\content\hourstemplate.html
 		scripts\weather_widget\content\mockData.json = scripts\weather_widget\content\mockData.json
+		scripts\weather_widget\content\mockHoursData.json = scripts\weather_widget\content\mockHoursData.json
 		scripts\weather_widget\content\style.css = scripts\weather_widget\content\style.css
 		scripts\weather_widget\content\tabstemplate.html = scripts\weather_widget\content\tabstemplate.html
 	EndProjectSection

@@ -34,11 +34,12 @@ define([], function () {
             var field = document.getElementById(currId);
             var tab = field.getElementsByClassName('tabs');
             var lis = tab[0].getElementsByTagName('li');
-            var tabInner = field.getElementsByClassName('tabInner');
-            var divs = tabInner[0].getElementsByTagName('div');
+            var tabInner = field.getElementsByClassName('tab-inner');
+            var tabHour = tabInner[0].getElementsByClassName('item-hours')[0];
+            var tabDay = tabInner[0].getElementsByClassName('item-days')[0];
             var buttons = field.getElementsByTagName('input');
-            divs[0].setAttribute('style', 'display:block');
-            divs[1].setAttribute('style', 'display:none');
+            tabHour.setAttribute('style', 'display:block');
+            tabDay.setAttribute('style', 'display:none');
             lis[0].setAttribute('class', 'active');
             lis[1].setAttribute('class', '');
             buttons[0].setAttribute('style', 'display:none');
@@ -50,10 +51,11 @@ define([], function () {
             var field = document.getElementById(currId);
             var tab = field.getElementsByClassName('tabs');
             var lis = tab[0].getElementsByTagName('li');
-            var tabInner = field.getElementsByClassName('tabInner');
-            var divs = tabInner[0].getElementsByTagName('div');
-            divs[0].setAttribute('style', 'display:none');
-            divs[1].setAttribute('style', 'display:block');
+            var tabInner = field.getElementsByClassName('tab-inner');
+            var tabHour = tabInner[0].getElementsByClassName('item-hours')[0];
+            var tabDay = tabInner[0].getElementsByClassName('item-days')[0];
+            tabHour.setAttribute('style', 'display:none');
+            tabDay.setAttribute('style', 'display:block');
             lis[0].setAttribute('class', '');
             lis[1].setAttribute('class', 'active');
             currState = 'day';
@@ -65,16 +67,16 @@ define([], function () {
             var index;
             currId = id;
             field.innerHTML = tabsTemplate.documentElement.innerHTML;
-            var tabInner = field.getElementsByClassName('tabInner');
-            var tabDivs = tabInner[0].getElementsByTagName('div');
+            var tabInner = field.getElementsByClassName('tab-inner');
+            var tabHour = tabInner[0].getElementsByClassName('item-hours')[0];
+            var tabDay = tabInner[0].getElementsByClassName('item-days')[0];
             var lis = field.getElementsByTagName('li');
 
-            tabDivs[0].innerHTML = "";
-            tabDivs[1].innerHTML = "";
-            for (index = 0; index != 5; index++)
-                tabDivs[0].innerHTML += hoursTemplate.documentElement.innerHTML;
+            tabHour.innerHTML = "";
+            tabDay.innerHTML = "";
+            tabHour.innerHTML += hoursTemplate.documentElement.innerHTML;
             for (index = 0; index != perPage; index++)
-                tabDivs[1].innerHTML += fieldTemplate.documentElement.innerHTML;
+                tabDay.innerHTML += fieldTemplate.documentElement.innerHTML;
             field.innerHTML += buttonsTemplate.documentElement.innerHTML;
 
             var buttons = field.getElementsByTagName('input');
@@ -90,13 +92,13 @@ define([], function () {
         
         var refreshHours = function () {
             var myfield = document.getElementById(currId);
-            var tabInner = myfield.getElementsByClassName('tabInner');
-            var field = tabInner[0].getElementsByTagName('div')[0];
-            var index = 0, secIndex = 0, legendIndex = 1;
+            var tabInner = myfield.getElementsByClassName('tab-inner');
+            var field = tabInner[0].getElementsByClassName('item-hours')[0];
+            var index = 0, secIndex = 0, count = 8;
             var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);
             var img = field.getElementsByTagName('img');
-            var centers = field.getElementsByTagName('center');
+            var info = field.getElementsByClassName('info-style');
             var legend = field.getElementsByTagName('h2');
             var descr = field.getElementsByTagName('h4');
             var tds = field.getElementsByClassName('hour-forecast');
@@ -111,16 +113,16 @@ define([], function () {
                 tds[index++].setAttribute('style', 'display:none');
                 currDate.setHours(currDate.getHours() + 3); 
             }
-            //------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             legend[0].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
-            while (secIndex != hoursData.cnt) {
+            while (index != count) {
                 descr[index].innerHTML = hoursData.list[secIndex].weather[0].description;
 
                 img[index].setAttribute('src', 'http://openweathermap.org/img/w/' + hoursData.list[secIndex].weather[0].icon + '.png');
 
-                centers[index * 3].innerHTML = hoursData.list[secIndex].main.temp;
-                centers[index * 3 + 1].innerHTML = hoursData.list[secIndex].main.pressure;
-                centers[index * 3 + 2].innerHTML = hoursData.list[secIndex].main.humidity;
+                info[index * 4].innerHTML = hoursData.list[secIndex].main.temp + 'C';
+                info[index * 4 + 1].innerHTML = hoursData.list[secIndex].wind.speed + 'm/s';
+                info[index * 4 + 2].innerHTML = hoursData.list[secIndex].main.pressure;
+                info[index * 4 + 3].innerHTML = hoursData.list[secIndex].main.humidity;
 
                 if (currDate.getHours() == 0)
                     legend[legendIndex++].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
@@ -129,11 +131,11 @@ define([], function () {
                 secIndex++;
             }
         }
-
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var refreshDaily = function () {
             var myfield = document.getElementById(currId);
-            var tabInner = myfield.getElementsByClassName('tabInner');
-            var field = tabInner[0].getElementsByTagName('div')[1];
+            var tabInner = myfield.getElementsByClassName('tab-inner');
+            var field = tabInner[0].getElementsByClassName('item-days')[0];
             var index, secIndex;
             var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);

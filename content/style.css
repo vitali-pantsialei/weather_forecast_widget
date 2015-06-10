@@ -6,13 +6,14 @@
     width: 85px;
 }
 
-.day_night_style {
+.day-night-style {
     width: 400px;
 }
 
-.info_style {
+.info-style {
+    font-size: x-small;
     width: 70px;
-    text-align: center;
+    padding: 1px 1px 1px 1px;
 }
 
 h2 {
@@ -37,13 +38,13 @@ h2 {
             padding-bottom: 6px;
         }
 
-.tabInner {
+.tab-inner {
     clear: both;
     border: 1px solid #aaa;
     overflow: hidden;
     background: #eee;
 }
 
-    .tabInner div {
+    .tab-inner div {
         padding: 10px;
     }
