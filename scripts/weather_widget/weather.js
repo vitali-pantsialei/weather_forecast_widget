@@ -1,6 +1,7 @@
 define([], function () {
     var retModule = function (perPage, dataProvider) {
         var page = 1;
+        var hourDay = 0;
         var inputData = dataProvider.getDailyJson();
         var hoursData = dataProvider.getHoursJson();
         var currId;
@@ -21,13 +22,25 @@ define([], function () {
         }
 
         var back = function () {
-            --page;
-            refreshDaily();
+            if (currState == 'day') {
+                --page;
+                refreshDaily();
+            }
+            else {
+                --hourDay;
+                refreshHours();
+            }
         }
 
         var next = function () {
-            ++page;
-            refreshDaily();
+            if (currState == 'day') {
+                ++page;
+                refreshDaily();
+            }
+            else {
+                ++hourDay;
+                refreshHours();
+            }
         }
 
         var setHours = function () {
@@ -37,14 +50,12 @@ define([], function () {
             var tabInner = field.getElementsByClassName('tab-inner');
             var tabHour = tabInner[0].getElementsByClassName('item-hours')[0];
             var tabDay = tabInner[0].getElementsByClassName('item-days')[0];
-            var buttons = field.getElementsByTagName('input');
-            tabHour.setAttribute('style', 'display:block');
-            tabDay.setAttribute('style', 'display:none');
-            lis[0].setAttribute('class', 'active');
-            lis[1].setAttribute('class', '');
-            buttons[0].setAttribute('style', 'display:none');
-            buttons[1].setAttribute('style', 'display:none');
+            tabHour.style.display = 'block';
+            tabDay.style.display = 'none';
+            lis[0].className = 'active';
+            lis[1].className = '';
             currState = 'hour';
+            refreshHours();
         }
 
         var setDays = function () {
@@ -54,10 +65,10 @@ define([], function () {
             var tabInner = field.getElementsByClassName('tab-inner');
             var tabHour = tabInner[0].getElementsByClassName('item-hours')[0];
             var tabDay = tabInner[0].getElementsByClassName('item-days')[0];
-            tabHour.setAttribute('style', 'display:none');
-            tabDay.setAttribute('style', 'display:block');
-            lis[0].setAttribute('class', '');
-            lis[1].setAttribute('class', 'active');
+            tabHour.style.display = 'none';
+            tabDay.style.display = 'block';
+            lis[0].className = '';
+            lis[1].className = 'active';
             currState = 'day';
             refreshDaily();
         }
@@ -107,11 +118,18 @@ define([], function () {
             currDate.setMinutes(0);
             currDate.setSeconds(0);
             currDate.setMilliseconds(0);
+
+            currDate.setDate(currDate.getDate() + hourDay);
+
             while (getFormat2(currDate) != hoursData.list[secIndex].dt_txt.substr(0, 10))
                 secIndex++;
+            for (index = 0; index != count; ++index) {
+                tds[index].style.display = 'table-cell';
+            }
+            index = 0;
             while (getFormat1(currDate) != hoursData.list[secIndex].dt_txt) {
-                tds[index++].setAttribute('style', 'display:none');
-                currDate.setHours(currDate.getHours() + 3); 
+                tds[index++].style.display = 'none';
+                currDate.setHours(currDate.getHours() + 3);
             }
             legend[0].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
             while (index != count) {
@@ -119,19 +137,32 @@ define([], function () {
 
                 img[index].setAttribute('src', 'http://openweathermap.org/img/w/' + hoursData.list[secIndex].weather[0].icon + '.png');
 
-                info[index * 4].innerHTML = hoursData.list[secIndex].main.temp + 'C';
-                info[index * 4 + 1].innerHTML = hoursData.list[secIndex].wind.speed + 'm/s';
+                info[index * 4].innerHTML = hoursData.list[secIndex].main.temp + ' C';
+                info[index * 4 + 1].innerHTML = hoursData.list[secIndex].wind.speed + ' m/s';
                 info[index * 4 + 2].innerHTML = hoursData.list[secIndex].main.pressure;
                 info[index * 4 + 3].innerHTML = hoursData.list[secIndex].main.humidity;
 
-                if (currDate.getHours() == 0)
-                    legend[legendIndex++].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
                 currDate.setHours(currDate.getHours() + 3);
                 index++;
                 secIndex++;
             }
+            if (currState == 'hour') {
+                var buttons = myfield.getElementsByTagName('input');
+                if (hourDay == 0) {
+                    buttons[0].style.display = 'none';
+                }
+                else {
+                    buttons[0].style.display = 'inline-block';
+                }
+                if (hourDay == 4) {
+                    buttons[1].style.display = 'none';
+                }
+                else {
+                    buttons[1].style.display = 'inline-block';
+                }
+            }
         }
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         var refreshDaily = function () {
             var myfield = document.getElementById(currId);
             var tabInner = myfield.getElementsByClassName('tab-inner');
@@ -145,7 +176,7 @@ define([], function () {
             var descr = field.getElementsByTagName('h4');
 
             for (index = 0; index != perPage; index++)
-                fieldsets[index].setAttribute('style', 'display:block');
+            fieldsets[index].style.display = 'block';
 
             for (index = (page - 1) * perPage, secIndex = 0; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index, ++secIndex) {
                 
@@ -169,20 +200,20 @@ define([], function () {
             if (currState == 'day') {
                 var buttons = myfield.getElementsByTagName('input');
                 if (page != 1) {
-                    buttons[0].setAttribute('style', 'display:block');
+                    buttons[0].style.display = 'inline-block';
                 }
                 else {
-                    buttons[0].setAttribute('style', 'display:none');
+                    buttons[0].style.display = 'none';
                 }
                 if (inputData.list.length > page * perPage) {
-                    buttons[1].setAttribute('style', 'display:block');
+                    buttons[1].style.display = 'inline-block';
                 }
                 else {
                     if ((inputData.list.length) % perPage != 0) {
                         for (index = (inputData.list.length) % perPage; index != perPage; index++)
-                            fieldsets[index].setAttribute('style', 'display:none');
+                            fieldsets[index].style.display = 'none';
                     }
-                    buttons[1].setAttribute('style', 'display:none');
+                    buttons[1].style.display = 'none';
                 }
             }
         }
