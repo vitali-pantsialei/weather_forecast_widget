@@ -1,4 +1,4 @@
-define([], function () {
+define(['./workWithDate'], function (wDate) {
     var retModule = function (perPage, dataProvider) {
         var page = 1;
         var hourDay = 0;
@@ -8,6 +8,7 @@ define([], function () {
         var currState = 'hour';
         var fieldTemplate, buttonsTemplate, tabsTemplate, hoursTemplate;
         var today = new Date();
+        var workWithDate = new wDate();
 
         var options = {
             weekday: "long", year: "numeric", month: "long",
@@ -121,13 +122,13 @@ define([], function () {
 
             currDate.setDate(currDate.getDate() + hourDay);
 
-            while (getFormat2(currDate) != hoursData.list[secIndex].dt_txt.substr(0, 10))
+            while (workWithDate.getFormat2(currDate) != hoursData.list[secIndex].dt_txt.substr(0, 10))
                 secIndex++;
             for (index = 0; index != count; ++index) {
                 tds[index].style.display = 'table-cell';
             }
             index = 0;
-            while (getFormat1(currDate) != hoursData.list[secIndex].dt_txt) {
+            while (workWithDate.getFormat1(currDate) != hoursData.list[secIndex].dt_txt) {
                 tds[index++].style.display = 'none';
                 currDate.setHours(currDate.getHours() + 3);
             }
@@ -139,8 +140,8 @@ define([], function () {
 
                 info[index * 4].innerHTML = hoursData.list[secIndex].main.temp + ' C';
                 info[index * 4 + 1].innerHTML = hoursData.list[secIndex].wind.speed + ' m/s';
-                info[index * 4 + 2].innerHTML = hoursData.list[secIndex].main.pressure;
-                info[index * 4 + 3].innerHTML = hoursData.list[secIndex].main.humidity;
+                info[index * 4 + 2].innerHTML = hoursData.list[secIndex].main.pressure + ' hpa';
+                info[index * 4 + 3].innerHTML = hoursData.list[secIndex].main.humidity + ' %';
 
                 currDate.setHours(currDate.getHours() + 3);
                 index++;
@@ -216,21 +217,6 @@ define([], function () {
                     buttons[1].style.display = 'none';
                 }
             }
-        }
-
-        var withZero = function (input) {
-            if (input < 10)
-                return '0' + input;
-            else
-                return input;
-        }
-
-        var getFormat1 = function (dateTime) {
-            return dateTime.getFullYear() + '-' + withZero(dateTime.getMonth() + 1) + '-' + withZero(dateTime.getDate()) + ' ' + withZero(dateTime.getHours()) + ':' + withZero(dateTime.getMinutes()) + ':' + withZero(dateTime.getSeconds());
-        }
-
-        var getFormat2 = function (dateTime) {
-            return dateTime.getFullYear() + '-' + withZero(dateTime.getMonth() + 1) + '-' + withZero(dateTime.getDate());
         }
 
         this.set = function (id) {
