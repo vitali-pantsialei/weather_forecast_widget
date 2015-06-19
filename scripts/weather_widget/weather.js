@@ -112,7 +112,9 @@ define(['./workWithDate'], function (wDate) {
             var img = field.getElementsByTagName('img');
             var info = field.getElementsByClassName('info-style');
             var legend = field.getElementsByTagName('h2');
-            var descr = field.getElementsByTagName('h4');
+            var descr = field.getElementsByTagName('i');
+            var temp = field.getElementsByClassName('badge');
+            var otherInf = field.getElementsByClassName('info-style');
             var tds = field.getElementsByClassName('hour-forecast');
 
             currDate.setHours(0);
@@ -125,7 +127,7 @@ define(['./workWithDate'], function (wDate) {
             while (workWithDate.getFormat2(currDate) != hoursData.list[secIndex].dt_txt.substr(0, 10))
                 secIndex++;
             for (index = 0; index != count; ++index) {
-                tds[index].style.display = 'table-cell';
+                tds[index].style.display = 'table-row';
             }
             index = 0;
             while (workWithDate.getFormat1(currDate) != hoursData.list[secIndex].dt_txt) {
@@ -134,14 +136,13 @@ define(['./workWithDate'], function (wDate) {
             }
             legend[0].innerHTML = hoursData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
             while (index != count) {
-                descr[index].innerHTML = hoursData.list[secIndex].weather[0].description;
 
                 img[index].setAttribute('src', 'http://openweathermap.org/img/w/' + hoursData.list[secIndex].weather[0].icon + '.png');
 
-                info[index * 4].innerHTML = hoursData.list[secIndex].main.temp + ' C';
-                info[index * 4 + 1].innerHTML = hoursData.list[secIndex].wind.speed + ' m/s';
-                info[index * 4 + 2].innerHTML = hoursData.list[secIndex].main.pressure + ' hpa';
-                info[index * 4 + 3].innerHTML = hoursData.list[secIndex].main.humidity + ' %';
+                temp[index].innerHTML = hoursData.list[secIndex].main.temp + ' C';
+                descr[index].innerHTML = hoursData.list[secIndex].weather[0].description;
+
+                otherInf[index].innerHTML = hoursData.list[secIndex].wind.speed + ' m/s, ' + hoursData.list[secIndex].main.humidity + ' %, ' + hoursData.list[secIndex].main.pressure + ' hpa';
 
                 currDate.setHours(currDate.getHours() + 3);
                 index++;
@@ -172,9 +173,11 @@ define(['./workWithDate'], function (wDate) {
             var fieldsets = field.getElementsByTagName('fieldset');
             var currDate = new Date(today);
             var img = field.getElementsByTagName('img');
-            var centers = field.getElementsByTagName('center');
             var legend = field.getElementsByTagName('h2');
-            var descr = field.getElementsByTagName('h4');
+            var descr = field.getElementsByTagName('i');
+            var dayTemp = field.getElementsByClassName('label label-day');
+            var nightTemp = field.getElementsByClassName('label label-night');
+            var otherInf = field.getElementsByClassName('info-style');
 
             for (index = 0; index != perPage; index++)
             fieldsets[index].style.display = 'block';
@@ -184,18 +187,14 @@ define(['./workWithDate'], function (wDate) {
                 currDate.setDate(today.getDate() + index);
                 legend[secIndex].innerHTML = inputData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
 
-                descr[secIndex * 2].innerHTML = inputData.list[index].weather[0].description;
-                descr[secIndex * 2 + 1].innerHTML = inputData.list[index].weather[0].description;
+                descr[secIndex].innerHTML = inputData.list[index].weather[0].description;
 
-                img[secIndex * 2].setAttribute('src', 'http://openweathermap.org/img/w/' + inputData.list[index].weather[0].icon + '.png');
-                img[secIndex * 2 + 1].setAttribute('src', 'http://openweathermap.org/img/w/' + inputData.list[index].weather[0].icon + '.png');
+                img[secIndex].setAttribute('src', 'http://openweathermap.org/img/w/' + inputData.list[index].weather[0].icon + '.png');
 
-                centers[secIndex * 6].innerHTML = inputData.list[index].temp.night;
-                centers[secIndex * 6 + 1].innerHTML = inputData.list[index].pressure;
-                centers[secIndex * 6 + 2].innerHTML = inputData.list[index].humidity;
-                centers[secIndex * 6 + 3].innerHTML = inputData.list[index].temp.day;
-                centers[secIndex * 6 + 4].innerHTML = inputData.list[index].pressure;
-                centers[secIndex * 6 + 5].innerHTML = inputData.list[index].humidity;
+                nightTemp[secIndex].innerHTML = inputData.list[index].temp.night + ' C';
+                dayTemp[secIndex].innerHTML = inputData.list[index].temp.day + ' C';
+                otherInf[secIndex * 2].innerHTML = inputData.list[index].speed + ' m/s';
+                otherInf[secIndex * 2 + 1].innerHTML = 'clouds: ' + inputData.list[index].clouds + ' %, ' + inputData.list[index].pressure + ' hpa';
             }
 
             if (currState == 'day') {

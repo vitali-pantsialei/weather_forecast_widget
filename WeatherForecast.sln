@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "weather_widget", "weather_w
 		scripts\weather_widget\data.js = scripts\weather_widget\data.js
 		scripts\weather_widget\openWeatherProvider.js = scripts\weather_widget\openWeatherProvider.js
 		scripts\weather_widget\weather.js = scripts\weather_widget\weather.js
+		scripts\weather_widget\workWithDate.js = scripts\weather_widget\workWithDate.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{42858265-DD1D-49C3-AADC-EE08C5FF70D9}"
