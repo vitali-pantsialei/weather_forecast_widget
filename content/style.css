@@ -103,3 +103,7 @@ td {
 tr.hour-forecast td {
     border-top: 1pt solid black;
 }
+
+.loading {
+    display: none;
+}

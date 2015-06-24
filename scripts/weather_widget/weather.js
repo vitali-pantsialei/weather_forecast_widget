@@ -16,10 +16,18 @@ define(['./workWithDate'], function (wDate) {
         };
 
         var refreshData = function () {
+            var myfield = document.getElementById(currId);
+            var load = myfield.getElementsByClassName('loading')[0];
+
+            load.style.display = 'inline-block';
+
             inputData = dataProvider.getDailyJson();
             hoursData = dataProvider.getHoursJson();
             refreshHours();
             refreshDaily();
+
+            //setTimeout(function() {load.style.display = 'none';}, 3000);
+            load.style.display = 'none';
         }
 
         var back = function () {
@@ -101,7 +109,7 @@ define(['./workWithDate'], function (wDate) {
             refreshHours();
             refreshDaily();
         }
-        
+
         var refreshHours = function () {
             var myfield = document.getElementById(currId);
             var tabInner = myfield.getElementsByClassName('tab-inner');
@@ -180,10 +188,11 @@ define(['./workWithDate'], function (wDate) {
             var otherInf = field.getElementsByClassName('info-style');
 
             for (index = 0; index != perPage; index++)
-            fieldsets[index].style.display = 'block';
+                fieldsets[index].style.display = 'block';
 
             for (index = (page - 1) * perPage, secIndex = 0; index != (inputData.list.length > page * perPage ? page * perPage : inputData.list.length) ; ++index, ++secIndex) {
-                
+
+                currDate = new Date(today);
                 currDate.setDate(today.getDate() + index);
                 legend[secIndex].innerHTML = inputData.city.name + ", " + currDate.toLocaleDateString("en-US", options);
 
